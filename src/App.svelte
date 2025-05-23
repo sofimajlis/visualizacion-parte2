@@ -9,18 +9,19 @@
   import otonio from "/images/hoja.svg"
   import primavera from "/images/flor.svg"
 
+
   import * as d3 from "d3";
 
   const viajes = [
     {"ID":1,"Monto":850,"Region":"Europa","Estacion":"Verano","Mes":7,"Satisfaccion":5,"Acompaniantes":2},
     {"ID":2,"Monto":430,"Region":"Asia","Estacion":"Invierno","Mes":1,"Satisfaccion":3,"Acompaniantes":0},
     {"ID":3,"Monto":600,"Region":"América","Estacion":"Primavera","Mes":11,"Satisfaccion":4,"Acompaniantes":1},
-    {"ID":4,"Monto":1250,"Region":"Oceanía","Estacion":"Otoño","Mes":8,"Satisfaccion":5,"Acompaniantes":4},
+    {"ID":4,"Monto":1250,"Region":"Oceanía","Estacion":"Otoño","Mes":8,"Satisfaccion":6,"Acompaniantes":4},
     {"ID":5,"Monto":300,"Region":"África","Estacion":"Verano","Mes":4,"Satisfaccion":2,"Acompaniantes":0},
     {"ID":6,"Monto":980,"Region":"Europa","Estacion":"Primavera","Mes":1,"Satisfaccion":4,"Acompaniantes":1},
     {"ID":7,"Monto":560,"Region":"Asia","Estacion":"Otoño","Mes":12,"Satisfaccion":3,"Acompaniantes":1},
     {"ID":8,"Monto":750,"Region":"América","Estacion":"Invierno","Mes":9,"Satisfaccion":5,"Acompaniantes":2},
-    {"ID":9,"Monto":640,"Region":"Oceanía","Estacion":"Verano","Mes":5,"Satisfaccion":4,"Acompaniantes":1},
+    {"ID":9,"Monto":640,"Region":"Oceanía","Estacion":"Verano","Mes":5,"Satisfaccion":6,"Acompaniantes":1},
     {"ID":10,"Monto":1050,"Region":"África","Estacion":"Primavera","Mes":2,"Satisfaccion":5,"Acompaniantes":4},
     {"ID":11,"Monto":200,"Region":"Europa","Estacion":"Otoño","Mes":6,"Satisfaccion":1,"Acompaniantes":0},
     {"ID":12,"Monto":370,"Region":"Asia","Estacion":"Verano","Mes":10,"Satisfaccion":2,"Acompaniantes":1},
@@ -29,7 +30,7 @@
     {"ID":15,"Monto":690,"Region":"África","Estacion":"Otoño","Mes":7,"Satisfaccion":4,"Acompaniantes":2},
     {"ID":16,"Monto":730,"Region":"Europa","Estacion":"Invierno","Mes":9,"Satisfaccion":2,"Acompaniantes":0},
     {"ID":17,"Monto":950,"Region":"Asia","Estacion":"Primavera","Mes":6,"Satisfaccion":5,"Acompaniantes":4},
-    {"ID":18,"Monto":960,"Region":"América","Estacion":"Verano","Mes":8,"Satisfaccion":3,"Acompaniantes":1},
+    {"ID":18,"Monto":960,"Region":"América","Estacion":"Verano","Mes":8,"Satisfaccion":6,"Acompaniantes":1},
     {"ID":19,"Monto":1210,"Region":"Oceanía","Estacion":"Primavera","Mes":10,"Satisfaccion":4,"Acompaniantes":2},
     {"ID":20,"Monto":490,"Region":"África","Estacion":"Invierno","Mes":5,"Satisfaccion":3,"Acompaniantes":1}
   ];
@@ -79,15 +80,26 @@
   Otoño: otonio,
   Primavera:primavera
 };
-  
+
+const yInicio = 86;
+const yFin = 226.99;
+const totalNiveles = 6;
+
+// Cálculo dinámico de la altura de la línea "rellenada"
+function calcularYSatisfaccion(nivel) {
+  return yFin - ((nivel / totalNiveles) * (yFin - yInicio));
+}
+
 </script>
 
 <main>
   <div class="headline">
-    <h2>Visualización de Valijas</h2>
+    <h2>Historias dentro de una valija</h2>
+    <h3>Cada viaje deja un recuerdo. Estas valijas representan las aventuras recientes de nuestros amigos: cuántos fueron, a dónde, en qué época del año, cuánto disfrutaron y cuánto gastaron.
+      Las valijas que ves no solo llevan ropa, también llevan historias, momentos compartidos y emociones.<h3>
   </div>
   <div class= "header">
-  <img src="/images/Referencias.svg" width="850" justify-content= "center" align-items= "center"
+  <img src="/images/Referencias2.svg" width="1100" justify-content= "center" align-items= "center"
   alt="explicacion"/>
   </div>
   <div class="container" style="display: flex; flex-wrap: wrap; max-width: 900px; gap: 20px;">
@@ -110,6 +122,13 @@
             <rect id="borde" x="9" y="40" width="171" height="233" rx="20" stroke="{colorContinente(viaje.Region)}" stroke-width="10" shape-rendering="crispEdges"/>
             </g>
             <path id= "cierre" d="M35.0871 88.8847L34.4472 226.993" stroke="#B7A6A6" stroke-width="2"/>
+              <line
+                x1="34.5" y1="{calcularYSatisfaccion(viaje.Satisfaccion)}"
+                x2="34.5" y2="226.993"
+                stroke="#000000"
+                stroke-width="2"
+              />
+
             {#each nivelesY as y, i}
               <line
                 x1="30" y1={y}
@@ -118,7 +137,6 @@
                 stroke-width="2"
               />
             {/each}
-            <!-- <path d="M34.4472 226.993 L35.0871 88.8847" stroke="black" stroke-width="2" stroke-dasharray="{dashLength}, {totalLength - dashLength}" stroke-dashoffset="0"/> -->
             <g filter="url(#filter2_d_13_88)">
             <rect width="48.3648" height="62.1777" rx="3" transform="matrix(0.974669 -0.223652 0.231685 0.972791 98.2067 47.0853)" fill="#404040"/>
             </g>
@@ -216,6 +234,13 @@
               <rect x="9" y="40" width="171" height="233" rx="20" stroke="{colorContinente(viaje.Region)}" stroke-width="10" shape-rendering="crispEdges"/>
               </g>
               <path id= "cierre" d="M35.0871 88.8847L34.4472 226.993" stroke="#B7A6A6" stroke-width="2"/>
+                <line
+                  x1="34.5" y1="{calcularYSatisfaccion(viaje.Satisfaccion)}"
+                  x2="34.5" y2="226.993"
+                  stroke="#000000"
+                  stroke-width="2"
+                />
+
               {#each nivelesY as y, i}
                 <line
                   x1="30" y1={y}
@@ -323,6 +348,13 @@
               <rect x="9" y="40" width="171" height="233" rx="20" stroke="{colorContinente(viaje.Region)}" stroke-width="10" shape-rendering="crispEdges"/>
               </g>
               <path id = "cierre" d="M35.0871 88.8847L34.4472 226.993" stroke="#B7A6A6" stroke-width="2"/>
+                <line
+                  x1="34.5" y1="{calcularYSatisfaccion(viaje.Satisfaccion)}"
+                  x2="34.5" y2="226.993"
+                  stroke="#000000"
+                  stroke-width="2"
+                />
+
               {#each nivelesY as y, i}
                 <line
                   x1="30" y1={y}
@@ -433,13 +465,20 @@
                 <rect x="9" y="40" width="171" height="233" rx="20" stroke="{colorContinente(viaje.Region)}" stroke-width="10" shape-rendering="crispEdges"/>
                 </g>
                 <path id= "cierre" d="M35.0871 88.8847L34.4472 226.993" stroke="#B7A6A6" stroke-width="2"/>
+                  <line
+                    x1="34.5" y1="{calcularYSatisfaccion(viaje.Satisfaccion)}"
+                    x2="34.5" y2="226.993"
+                    stroke="#000000"
+                    stroke-width="2"
+                  />
+
                 {#each nivelesY as y, i}
-                <line
-                  x1="30" y1={y}
-                  x2="40" y2={y}
-                  stroke={i < viaje.Satisfaccion ? "#000000" : "#B7A6A6"}
-                  stroke-width="2"
-                />
+                  <line
+                    x1="30" y1={y}
+                    x2="40" y2={y}
+                    stroke={i < viaje.Satisfaccion ? "#000000" : "#B7A6A6"}
+                    stroke-width="2"
+                  />
                 {/each}
                 <g filter="url(#filter2_d_13_91)">
                 <rect width="48.3648" height="62.1777" rx="3" transform="matrix(0.974669 -0.223652 0.231685 0.972791 98.2067 47.0853)" fill="#404040"/>
@@ -544,6 +583,13 @@
                 <rect x="9" y="40" width="171" height="233" rx="20" stroke="{colorContinente(viaje.Region)}" stroke-width="10" shape-rendering="crispEdges"/>
                 </g>
                 <path  id= "cierre" d="M35.0871 88.8847L34.4472 226.993" stroke="#B7A6A6" stroke-width="2"/>
+                  <line
+                    x1="34.5" y1="{calcularYSatisfaccion(viaje.Satisfaccion)}"
+                    x2="34.5" y2="226.993"
+                    stroke="#000000"
+                    stroke-width="2"
+                  />
+
                 {#each nivelesY as y, i}
                   <line
                     x1="30" y1={y}
@@ -638,11 +684,31 @@
 </main>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap'); 
 
-  h2{
-    font-size: 50px;
+ h2 {
+  font-size: 48px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  letter-spacing: -1px;
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-  }
+h3 {
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 20px;
+  color: #333;
+  line-height: 1.5;
+}
+
+  
+
   .header {
     display: flex;
     justify-content: center;
@@ -669,6 +735,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-end;  
     gap: 40px;         /* Espacio horizontal y vertical entre valijas */
     max-width: 1200px; /* Ancho máximo de la grilla */
     margin: 0 auto;    /* Centra el contenedor dentro de la página */
