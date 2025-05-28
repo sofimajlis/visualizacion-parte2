@@ -14,8 +14,6 @@
 
   import viajes from "/src/data/viajes.json";
 
-//agregar footer
-//coincida estacion con icono
 //filtrar los continentes, ordenarno por mes, investigar con un set de datos mas grandas, agregarle los nombres a las valijas, complementarlo con un analisis de viajes con volumenes de ingreso de extranjeros, etc con graficos
   function colorContinente(region) {
     const colores = {
