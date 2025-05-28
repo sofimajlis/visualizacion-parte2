@@ -12,29 +12,11 @@
 
   import * as d3 from "d3";
 
-  const viajes = [
-    {"ID":1,"Monto":850,"Region":"Europa","Estacion":"Verano","Mes":7,"Satisfaccion":5,"Acompaniantes":2},
-    {"ID":2,"Monto":430,"Region":"Asia","Estacion":"Invierno","Mes":1,"Satisfaccion":3,"Acompaniantes":0},
-    {"ID":3,"Monto":600,"Region":"América","Estacion":"Primavera","Mes":11,"Satisfaccion":4,"Acompaniantes":1},
-    {"ID":4,"Monto":1250,"Region":"Oceanía","Estacion":"Otoño","Mes":8,"Satisfaccion":6,"Acompaniantes":4},
-    {"ID":5,"Monto":300,"Region":"África","Estacion":"Verano","Mes":4,"Satisfaccion":2,"Acompaniantes":0},
-    {"ID":6,"Monto":980,"Region":"Europa","Estacion":"Primavera","Mes":1,"Satisfaccion":4,"Acompaniantes":1},
-    {"ID":7,"Monto":560,"Region":"Asia","Estacion":"Otoño","Mes":12,"Satisfaccion":3,"Acompaniantes":1},
-    {"ID":8,"Monto":750,"Region":"América","Estacion":"Invierno","Mes":9,"Satisfaccion":5,"Acompaniantes":2},
-    {"ID":9,"Monto":640,"Region":"Oceanía","Estacion":"Verano","Mes":5,"Satisfaccion":6,"Acompaniantes":1},
-    {"ID":10,"Monto":1050,"Region":"África","Estacion":"Primavera","Mes":2,"Satisfaccion":5,"Acompaniantes":4},
-    {"ID":11,"Monto":200,"Region":"Europa","Estacion":"Otoño","Mes":6,"Satisfaccion":1,"Acompaniantes":0},
-    {"ID":12,"Monto":370,"Region":"Asia","Estacion":"Verano","Mes":10,"Satisfaccion":2,"Acompaniantes":1},
-    {"ID":13,"Monto":820,"Region":"América","Estacion":"Primavera","Mes":3,"Satisfaccion":5,"Acompaniantes":3},
-    {"ID":14,"Monto":450,"Region":"Oceanía","Estacion":"Invierno","Mes":4,"Satisfaccion":3,"Acompaniantes":1},
-    {"ID":15,"Monto":690,"Region":"África","Estacion":"Otoño","Mes":7,"Satisfaccion":4,"Acompaniantes":2},
-    {"ID":16,"Monto":730,"Region":"Europa","Estacion":"Invierno","Mes":9,"Satisfaccion":2,"Acompaniantes":0},
-    {"ID":17,"Monto":950,"Region":"Asia","Estacion":"Primavera","Mes":6,"Satisfaccion":5,"Acompaniantes":4},
-    {"ID":18,"Monto":960,"Region":"América","Estacion":"Verano","Mes":8,"Satisfaccion":6,"Acompaniantes":1},
-    {"ID":19,"Monto":1210,"Region":"Oceanía","Estacion":"Primavera","Mes":10,"Satisfaccion":4,"Acompaniantes":2},
-    {"ID":20,"Monto":490,"Region":"África","Estacion":"Invierno","Mes":5,"Satisfaccion":3,"Acompaniantes":1}
-  ];
+  import viajes from "/src/data/viajes.json";
 
+//agregar footer
+//coincida estacion con icono
+//filtrar los continentes, ordenarno por mes, investigar con un set de datos mas grandas, agregarle los nombres a las valijas, complementarlo con un analisis de viajes con volumenes de ingreso de extranjeros, etc con graficos
   function colorContinente(region) {
     const colores = {
       Europa: "#852EFF",
@@ -95,8 +77,8 @@ function calcularYSatisfaccion(nivel) {
 <main>
   <div class="headline">
     <h2>Historias dentro de una valija</h2>
-    <h3>Cada viaje deja un recuerdo. Estas valijas representan las aventuras recientes de nuestros amigos: cuántos fueron, a dónde, en qué época del año, cuánto disfrutaron y cuánto gastaron.
-      Las valijas que ves no solo llevan ropa, también llevan historias, momentos compartidos y emociones.<h3>
+    <h3>Cada viaje deja un recuerdo. Estas valijas representan las aventuras recientes de nuestros amigos: <strong>cuántos fueron, a dónde, en qué época del año, cuánto disfrutaron y cuánto gastaron</strong>.
+      Las valijas que ves no solo llevan ropa, también llevan historias, momentos compartidos y emociones. </h3>
   </div>
   <div class= "header">
   <img src="/images/Referencias2.svg" width="1100" justify-content= "center" align-items= "center"
@@ -683,6 +665,17 @@ function calcularYSatisfaccion(nivel) {
   </div>
 </main>
 
+<footer class="footer">
+  <div class="footer-container">
+    <p><strong>Integrantes:</strong> Mia Mitelman · Ananke Benites Astoul · Sofía Majlis</p>
+    <div class="footer-links">
+      <a href="https://github.com/sofimajlis/visualizacion-parte2.git" target="_blank">GitHub</a>
+      <a href="visualizacion-parte2.vercel.app" target="_blank">Vercel</a>
+    </div>
+    <p><strong>Materia:</strong> Visualización de Datos · <strong>Carrera:</strong> Tecnología Digital · UTDT</p>
+  </div>
+</footer>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap'); 
 
@@ -741,5 +734,45 @@ h3 {
     margin: 0 auto;    /* Centra el contenedor dentro de la página */
     padding: 40px 20px;
   }
+.footer {
+  background-color: #111;
+  color: #eee;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  margin-top: 4rem;
+
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border-top: 2px solid #444;
+  border-radius: 16px 16px 0 0;
+}
+
+.footer-container p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.footer-links {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer a {
+  color: #ccc;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #fff;
+}
 
 </style>
