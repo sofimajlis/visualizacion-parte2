@@ -70,6 +70,19 @@ function calcularYSatisfaccion(nivel) {
   return yFin - ((nivel / totalNiveles) * (yFin - yInicio));
 }
 
+// FILTROS
+  let filtroRegion = "";
+  let filtroEstacion = "";
+  let filtroAcompaniantes = "";
+
+  // FUNCION FILTRO GENERAL
+  $: viajesFiltrados = viajes.filter(v =>
+    
+    (filtroRegion === "" || v.Region === filtroRegion) &&
+    (filtroEstacion === "" || v.Estacion === filtroEstacion) &&
+    (filtroAcompaniantes === "" || v.Acompaniantes === +filtroAcompaniantes)
+  );
+
 </script>
 
 <main>
@@ -83,8 +96,44 @@ function calcularYSatisfaccion(nivel) {
   alt="explicacion"/>
   </div>
   <div class="container" style="display: flex; flex-wrap: wrap; max-width: 900px; gap: 20px;">
-    {#each viajes as viaje}
-    <div class="valija">
+    <div class="filtros">
+      <div class= "filtro-item">
+        <label>Region:</label>
+        <select bind:value={filtroRegion}>
+          <option value="">Todas</option>
+          <option value="Europa">Europa</option>
+          <option value="Asia">Asia</option>
+          <option value="África">África</option>
+          <option value="América">América</option>
+          <option value="Oceanía">Oceanía</option>
+        </select>
+      </div>
+
+      <div class= "filtro-item">
+        <label>Estacion:</label>
+        <select margin-right:auto bind:value={filtroEstacion}>
+          <option value="">Todas</option>
+          <option value="Verano">Verano</option>
+          <option value="Invierno">Invierno</option>
+          <option value="Otoño">Otoño</option>
+          <option value="Primavera">Primavera</option>
+        </select>
+      </div>
+
+      <div class= "filtro-item">
+        <label>Acompañantes:</label>
+        <select bind:value={filtroAcompaniantes}>
+          <option value="">Todos</option>
+          {#each Array(5) as _, i}
+            <option value={i}>{i}</option>
+          {/each}
+        </select>
+      </div>
+    </div>
+
+
+    {#each viajesFiltrados as viaje}
+    <div class="valija" style="display: flex; flex-wrap: wrap; gap: 20px;">
       {#if viaje.Acompaniantes === 0}
           <svg width="{anchoValija(viaje.Monto)}" height="{altoValija(viaje.Monto)}" viewBox="0 0 189 286" fill="none" xmlns="http://www.w3.org/2000/svg">
             <image
@@ -716,6 +765,42 @@ h3 {
       margin: 20px;
       margin-top: 50px;
     }
+
+  .filtros {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 62px;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  max-width: 1200px;
+  margin-bottom: 20px;
+  font-family: 'Poppin';
+  overflow-x: auto; /* Para que no se rompa si el ancho es justo */
+}
+
+.filtros label {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 25px;
+  gap: 10px;
+}
+
+.filtros select {
+  font-size: 18px;
+  min-width: 100px;
+  padding: 4px 8px;
+  font-family: 'Poppin';
+}
+
+
+.filtro-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
   
   .valija {
     flex: 1 1 200px;    /* Ocupar al menos 200px, expandirse si hay lugar */
