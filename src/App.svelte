@@ -798,6 +798,7 @@ h3 {
 
 .filtro-item {
   display: flex;
+  font-family: 'Poppins', sans-serif;
   align-items: center;
   gap: 10px;
 }
