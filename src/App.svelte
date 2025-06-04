@@ -99,7 +99,7 @@ function calcularYSatisfaccion(nivel) {
     <div class="filtros">
       <div class= "filtro-item">
         <label>Region:</label>
-        <select bind:value={filtroRegion}>
+        <select class="opciones" bind:value={filtroRegion}>
           <option value="">Todas</option>
           <option value="Europa">Europa</option>
           <option value="Asia">Asia</option>
@@ -111,7 +111,7 @@ function calcularYSatisfaccion(nivel) {
 
       <div class= "filtro-item">
         <label>Estacion:</label>
-        <select margin-right:auto bind:value={filtroEstacion}>
+        <select class="opciones" margin-right:auto bind:value={filtroEstacion}>
           <option value="">Todas</option>
           <option value="Verano">Verano</option>
           <option value="Invierno">Invierno</option>
@@ -860,7 +860,7 @@ h3 {
   color: #fff;
 }
 
-select, option {
+.opciones {
   font-family: 'Poppins', sans-serif;
 }
 
