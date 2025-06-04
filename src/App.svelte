@@ -860,9 +860,11 @@ h3 {
   color: #fff;
 }
 
-.opciones {
-  font-family: 'Poppins', sans-serif;
+select.opciones,
+select.opciones option {
+  font-family: 'Poppins', sans-serif !important;
 }
+
 
 
 </style>
