@@ -122,7 +122,7 @@ function calcularYSatisfaccion(nivel) {
 
       <div class= "filtro-item">
         <label>Acompañantes:</label>
-        <select bind:value={filtroAcompaniantes}>
+        <select class="opciones" bind:value={filtroAcompaniantes}>
           <option value="">Todos</option>
           {#each Array(5) as _, i}
             <option value={i}>{i}</option>
@@ -863,6 +863,7 @@ h3 {
 select.opciones,
 select.opciones option {
   font-family: 'Poppins', sans-serif !important;
+  font-weight: 300;
 }
 
 
