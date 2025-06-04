@@ -86,52 +86,78 @@ function calcularYSatisfaccion(nivel) {
 </script>
 
 <main>
+  
   <div class="headline">
     <h2>Historias dentro de una valija</h2>
     <h3>Cada viaje deja un recuerdo. Estas valijas representan las aventuras recientes de nuestros amigos: <strong>cuántos fueron, a dónde, en qué época del año, cuánto disfrutaron y cuánto gastaron</strong>.
       Las valijas que ves no solo llevan ropa, también llevan historias, momentos compartidos y emociones. </h3>
   </div>
-  <div class= "header">
-  <img src="/images/Referencias2.svg" width="1100" justify-content= "center" align-items= "center"
-  alt="explicacion"/>
+  
+  <!-- Sección de Referencias -->
+  <div class="section">
+    <h4 class="section-title">Referencias</h4>
+    <div class="references-container">
+      <img src="/images/Referencias2.svg" width="1100" alt="explicacion"/>
+    </div>
   </div>
-  <div class="container" style="display: flex; flex-wrap: wrap; max-width: 900px; gap: 20px;">
-    <div class="filtros">
-      <div class= "filtro-item">
-        <label>Region:</label>
-        <select class="opciones" bind:value={filtroRegion}>
-          <option value="">Todas</option>
-          <option value="Europa">Europa</option>
-          <option value="Asia">Asia</option>
-          <option value="África">África</option>
-          <option value="América">América</option>
-          <option value="Oceanía">Oceanía</option>
-        </select>
-      </div>
 
-      <div class= "filtro-item">
-        <label>Estacion:</label>
-        <select class="opciones" margin-right:auto bind:value={filtroEstacion}>
-          <option value="">Todas</option>
-          <option value="Verano">Verano</option>
-          <option value="Invierno">Invierno</option>
-          <option value="Otoño">Otoño</option>
-          <option value="Primavera">Primavera</option>
-        </select>
-      </div>
+  <!-- Sección de Filtros -->
+  <div class="section">
+    <h4 class="section-title">Filtros</h4>
+    <div class="filtros-container">
+      <div class="filtros">
+        <div class="filtro-item">
+          <div class="filtro-icon region-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          </div>
+          <label>Región:</label>
+          <div class="custom-select">
+          <select class="opciones" bind:value={filtroRegion}>
+            <option value="">Todas</option>
+            <option value="Europa">Europa</option>
+            <option value="Asia">Asia</option>
+            <option value="África">África</option>
+            <option value="América">América</option>
+            <option value="Oceanía">Oceanía</option>
+          </select>
+          </div>
+        </div>
 
-      <div class= "filtro-item">
-        <label>Acompañantes:</label>
-        <select class="opciones" bind:value={filtroAcompaniantes}>
-          <option value="">Todos</option>
-          {#each Array(5) as _, i}
-            <option value={i}>{i}</option>
-          {/each}
-        </select>
+        <div class="filtro-item">
+          <div class="filtro-icon season-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+          </div>
+          <label>Estación:</label>
+          <div class="custom-select">
+          <select class="opciones" bind:value={filtroEstacion}>
+            <option value="">Todas</option>
+            <option value="Verano">Verano</option>
+            <option value="Invierno">Invierno</option>
+            <option value="Otoño">Otoño</option>
+            <option value="Primavera">Primavera</option>
+          </select>
+          </div>
+        </div>
+
+        <div class="filtro-item">
+          <div class="filtro-icon companions-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <label>Acompañantes:</label>
+          <div class="custom-select">
+          <select class="opciones" bind:value={filtroAcompaniantes}>
+            <option value="">Todos</option>
+            {#each Array(5) as _, i}
+              <option value={i}>{i}</option>
+            {/each}
+          </select>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
 
-
+  <div class="container">
     {#each viajesFiltrados as viaje}
     <div class="valija" style="display: flex; flex-wrap: wrap; gap: 20px;">
       {#if viaje.Acompaniantes === 0}
@@ -747,8 +773,6 @@ h3 {
   line-height: 1.5;
 }
 
-  
-
   .header {
     display: flex;
     justify-content: center;
@@ -765,44 +789,6 @@ h3 {
       margin: 20px;
       margin-top: 50px;
     }
-
-  .filtros {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 62px;
-  align-items: center;
-  justify-content: center;
-  font-size: 30px;
-  max-width: 1200px;
-  margin-bottom: 20px;
-  font-family: 'Poppin';
-  overflow-x: auto; /* Para que no se rompa si el ancho es justo */
-}
-
-.filtros label {
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  font-size: 25px;
-  gap: 10px;
-}
-
-.filtros select {
-  font-size: 18px;
-  min-width: 100px;
-  padding: 4px 8px;
-  font-family: 'Poppin';
-}
-
-
-.filtro-item {
-  display: flex;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 300;
-  align-items: center;
-  gap: 10px;
-}
   
   .valija {
     flex: 1 1 200px;    /* Ocupar al menos 200px, expandirse si hay lugar */
@@ -819,6 +805,7 @@ h3 {
     margin: 0 auto;    /* Centra el contenedor dentro de la página */
     padding: 40px 20px;
   }
+
 .footer {
   background-color: #111;
   color: #eee;
@@ -860,12 +847,144 @@ h3 {
   color: #fff;
 }
 
-select.opciones,
-select.opciones option {
-  font-family: 'Poppins', sans-serif !important;
-  font-weight: 300;
+
+  /* Secciones con títulos */
+  .section {
+    margin: 60px 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-title {
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+  }
+
+  /* Referencias encuadradas */
+  .references-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Contenedor de filtros centrado */
+  .filtros-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Filtros alineados horizontalmente */
+  .filtros {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    padding: 30px;
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  .filtro-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 16px;
+
+    /* NUEVA sombra con más contraste */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+
+  .filtro-icon {
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+  }
+
+  .region-icon {
+    background: linear-gradient(135deg, #852EFF, #FF49D7);
+  }
+
+  .season-icon {
+    background: linear-gradient(135deg, #36BCFF, #127E16);
+  }
+
+  .companions-icon {
+    background: linear-gradient(135deg, #127E16, #FFC71D);
+  }
+
+  .filtro-item label {
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+    white-space: nowrap;
+  }
+
+  .opciones {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    padding: 8px 12px;
+    /* border: 2px solid #606060; */
+    opacity: 100px;
+    background: transparent;
+    border-radius: 12px;
+    min-width: 140px;
+    color: #333;
+    outline: none;
+    box-shadow: 0 0 2px 2px #606060;
+    transition: all 0.3s ease;
+  
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 30px;
+
 }
 
+  .opciones:hover {
+    box-shadow: 0 0 0 3px #606060;/* más intenso al seleccionar */
+}
+
+.custom-select {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-select::after {
+  content: "▼";
+  font-size: 12px;
+  color: #666;
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
 
 
 </style>
